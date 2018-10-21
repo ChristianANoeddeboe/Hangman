@@ -1,0 +1,47 @@
+package com.example.hangman;
+
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.ImageButton;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    
+    ImageButton play, highscore, settings, about;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        play = findViewById(R.id.playbtn);
+        highscore = findViewById(R.id.highscorebtn);
+        settings = findViewById(R.id.settignsbtn);
+        about = findViewById(R.id.aboutbtn);
+
+
+        play.setOnClickListener(this);
+        highscore.setOnClickListener(this);
+        settings.setOnClickListener(this);
+        about.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v == play) {
+            Intent game = new Intent(this, GameActivity.class);
+            startActivity(game);
+        }
+        if(v == highscore) {
+            System.out.println("Highscore pressed");
+        }
+        if(v == settings) {
+            System.out.println("Settings pressed");
+        }
+        if(v == about) {
+            System.out.println("About pressed");
+        }
+    }
+}
