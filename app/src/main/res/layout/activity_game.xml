@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GameActivity">
+    tools:context=".game.GameActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TableRow
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <ImageButton
@@ -59,24 +59,6 @@
                 android:textColor="@android:color/black"
                 android:textSize="36sp"
                 app:fontFamily="@font/malisemibold" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="34dp"
-            android:layout_marginRight="34dp">
-
-            <TextView
-                android:id="@+id/guessText"
-                android:layout_width="wrap_content"
-                android:layout_height="80dp"
-                android:background="@android:color/transparent"
-                android:ems="10"
-                android:inputType="textMultiLine"
-                android:textColor="@android:color/black"
-                android:textSize="31sp"
-                app:fontFamily="@font/maliregular" />
         </TableRow>
 
         <TableRow
@@ -127,5 +109,25 @@
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/guessbtn" />
         </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="34dp"
+            android:layout_marginRight="34dp"
+            android:layout_marginBottom="15dp">
+
+            <TextView
+                android:id="@+id/guessText"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:background="@android:color/transparent"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:textColor="@android:color/black"
+                android:textSize="31sp"
+                app:fontFamily="@font/maliregular" />
+        </TableRow>
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
