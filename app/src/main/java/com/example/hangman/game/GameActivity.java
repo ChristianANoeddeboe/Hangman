@@ -1,4 +1,4 @@
-package com.example.hangman;
+package com.example.hangman.game;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +11,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.hangman.Galgelogik;
+import com.example.hangman.R;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -47,6 +50,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
         guessInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            //TODO Make GBoard keyboard work with 'enter' button
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 System.out.println("EnterKey Pressed: " + event.toString());
                 if (event.getKeyCode() == KeyEvent.KEYCODE_ENTER || actionId == EditorInfo.IME_ACTION_DONE) {
@@ -120,10 +124,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     void gameover(boolean won) {
-        if(won)
+        if(won) {
+
+        }
     }
 
     void exit() {
         System.out.println("Exit button pressed.");
+        //TODO Brug dialogs her til at lave popup window.
     }
 }
