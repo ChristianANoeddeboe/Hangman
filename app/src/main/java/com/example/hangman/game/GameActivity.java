@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.hangman.Galgelogik;
 import com.example.hangman.R;
+import com.example.hangman.game.fragment.ExitDialogFragment;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -23,11 +24,14 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     EditText guessInput;
     Galgelogik galgelogik;
     InputMethodManager imm;
+    //ExitDialogFragment exit;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        //exit = new ExitDialogFragment();
 
         exitbtn = findViewById(R.id.exitbtn);
         guessbtn = findViewById(R.id.guessbtn);
@@ -132,5 +136,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     void exit() {
         System.out.println("Exit button pressed.");
         //TODO Brug dialogs her til at lave popup window.
+        //exit.show(getSupportFragmentManager(), "Exit");
     }
 }
