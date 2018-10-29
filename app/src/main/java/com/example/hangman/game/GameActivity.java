@@ -24,14 +24,14 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     EditText guessInput;
     Galgelogik galgelogik;
     InputMethodManager imm;
-    //ExitDialogFragment exit;
+    ExitDialogFragment exit;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        //exit = new ExitDialogFragment();
+        exit = new ExitDialogFragment();
 
         exitbtn = findViewById(R.id.exitbtn);
         guessbtn = findViewById(R.id.guessbtn);
@@ -136,6 +136,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     void exit() {
         System.out.println("Exit button pressed.");
         //TODO Brug dialogs her til at lave popup window.
-        //exit.show(getSupportFragmentManager(), "Exit");
+        exit.show(getSupportFragmentManager(), "Exit");
     }
 }
