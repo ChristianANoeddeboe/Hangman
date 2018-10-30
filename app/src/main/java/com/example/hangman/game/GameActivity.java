@@ -1,12 +1,16 @@
 package com.example.hangman.game;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.os.AsyncTask;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -24,14 +28,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     EditText guessInput;
     Galgelogik galgelogik;
     InputMethodManager imm;
-    ExitDialogFragment exit;
+    Button nobackbtn, yesbackbtn;
+    AsyncTask network;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
-        exit = new ExitDialogFragment();
 
         exitbtn = findViewById(R.id.exitbtn);
         guessbtn = findViewById(R.id.guessbtn);
@@ -47,6 +50,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         guessInput = findViewById(R.id.guessInput);
 
         galgelogik = new Galgelogik();
+
+        new AsyncTaskNetwork().execute();
 
         String word = galgelogik.getSynligtOrd();
         wordText.setText(word);
@@ -71,7 +76,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             guess();
         }
         if(v == exitbtn) {
-            exit();
+            exit(v);
         }
     }
 
@@ -133,7 +138,40 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    void exit() {
-        exit.show(getSupportFragmentManager(), "Exit");
+    void exit(View v) {
+        // custom dialog
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.fragment_exit_dialog);
+
+        nobackbtn = dialog.findViewById(R.id.nobackbtn);
+        yesbackbtn = dialog.findViewById(R.id.yesbackbtn);
+        // if button is clicked, close the custom dialog
+        nobackbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        yesbackbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
+
+    class AsyncTaskNetwork extends AsyncTask {
+        @Override
+        protected Object doInBackground(Object... arg0) {
+            try {
+                galgelogik.hentOrdFraDr();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            SystemClock.sleep(10000);
+            return null;
+        }
+    }
+
 }
