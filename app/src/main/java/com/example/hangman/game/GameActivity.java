@@ -134,8 +134,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     void exit() {
-        System.out.println("Exit button pressed.");
-        //TODO Brug dialogs her til at lave popup window.
         exit.show(getSupportFragmentManager(), "Exit");
     }
 }
