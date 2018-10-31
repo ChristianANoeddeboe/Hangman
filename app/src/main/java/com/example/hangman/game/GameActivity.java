@@ -77,7 +77,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                SystemClock.sleep(10000);
                 return null;
             }
         }
