@@ -18,7 +18,6 @@ import android.widget.TextView;
 
 import com.example.hangman.Galgelogik;
 import com.example.hangman.R;
-import com.example.hangman.game.fragment.ExitDialogFragment;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -29,7 +28,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     Galgelogik galgelogik;
     InputMethodManager imm;
     Button nobackbtn, yesbackbtn;
-    AsyncTask network;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,7 +49,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         galgelogik = new Galgelogik();
 
-        new AsyncTaskNetwork().execute();
+        initwords();
 
         String word = galgelogik.getSynligtOrd();
         wordText.setText(word);
@@ -68,6 +66,22 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 return true;
             }
         });
+    }
+
+    public void initwords() {
+        class AsyncTaskNetwork extends AsyncTask {
+            @Override
+            protected Object doInBackground(Object... arg0) {
+                try {
+                    galgelogik.hentOrdFraDr();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                SystemClock.sleep(10000);
+                return null;
+            }
+        }
+        new AsyncTaskNetwork().execute();
     }
 
     @Override
@@ -161,17 +175,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         dialog.show();
     }
 
-    class AsyncTaskNetwork extends AsyncTask {
-        @Override
-        protected Object doInBackground(Object... arg0) {
-            try {
-                galgelogik.hentOrdFraDr();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            SystemClock.sleep(10000);
-            return null;
-        }
-    }
+
 
 }
