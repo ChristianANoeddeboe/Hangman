@@ -7,16 +7,18 @@
     android:layout_marginLeft="20dp"
     android:layout_marginTop="100dp"
     android:layout_marginRight="20dp"
-    android:layout_marginBottom="150dp"
+    android:layout_marginBottom="180dp"
     android:background="@drawable/dialogbackground"
     android:orientation="vertical"
-    tools:context=".game.fragment.ExitDialogFragment">
+    tools:context=".game.fragment.ExitDialogFragment"
+    android:gravity="center">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:gravity="center"
         android:text="@string/exit_confirm1"
         android:textColor="@android:color/black"
@@ -55,7 +57,8 @@
             android:text="@string/yes"
             android:textColor="@android:color/black"
             android:textSize="30sp"
-            app:fontFamily="@font/malisemibold" />
+            app:fontFamily="@font/malisemibold"
+            android:layout_marginEnd="20dp" />
 
         <Button
             android:id="@+id/nobackbtn"
@@ -68,6 +71,7 @@
             android:text="@string/no"
             android:textColor="@android:color/white"
             android:textSize="30sp"
-            app:fontFamily="@font/malisemibold" />
+            app:fontFamily="@font/malisemibold"
+            android:layout_marginStart="20dp" />
     </LinearLayout>
 </LinearLayout>
