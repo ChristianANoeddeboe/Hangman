@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.hangman.Galgelogik;
 import com.example.hangman.R;
+import com.example.hangman.game.fragment.ExitDialogFragment;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -89,7 +91,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             guess();
         }
         if(v == exitbtn) {
-            exit(v);
+            exit();
         }
     }
 
@@ -151,14 +153,17 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    void exit(View v) {
-        // custom dialog
+    void exit() {
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        int width = metrics.widthPixels;
+        int height = metrics.heightPixels;
+
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.fragment_exit_dialog);
 
         nobackbtn = dialog.findViewById(R.id.nobackbtn);
         yesbackbtn = dialog.findViewById(R.id.yesbackbtn);
-        // if button is clicked, close the custom dialog
+
         nobackbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,6 +177,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
         dialog.show();
+        //dialog.getWindow().setLayout(width, height);
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
     }
 
 
