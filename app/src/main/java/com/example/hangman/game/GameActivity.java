@@ -28,7 +28,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     EditText guessInput;
     Galgelogik galgelogik;
     InputMethodManager imm;
-    Button nobtn, yesbtn;
+    Button nobackbtn, yesbackbtn, yesagainbtn, noagainbtn;
+
+    Dialog backdialog, gameoverdialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,10 +52,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         galgelogik = new Galgelogik();
 
-        initwords();
-
-        String word = galgelogik.getSynligtOrd();
-        wordText.setText(word);
+        newgame();
 
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
@@ -92,6 +91,34 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         if(v == exitbtn) {
             exit();
         }
+        if(v == nobackbtn) {
+            backdialog.dismiss();
+        }
+        if(v == yesbackbtn || v == noagainbtn) {
+            finish();
+        }
+        if(v == yesagainbtn) {
+            //For some reason i have to dismiss it twice.
+            gameoverdialog.dismiss();
+            newgame();
+            gameoverdialog.dismiss();
+        }
+    }
+
+    void newgame() {
+        //Fetches new words.
+        galgelogik.nulstil();
+        initwords();
+
+        //Hides new word
+        String word = galgelogik.getSynligtOrd();
+        wordText.setText(word);
+
+        //Resets picture.
+        levelView.setImageResource(R.drawable.level0);
+
+        //Resets used letters.
+        guessText.setText("");
     }
 
     void guess() {
@@ -152,78 +179,51 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     void won() {
-        final Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.fragment_won);
+        gameoverdialog = new Dialog(this);
+        gameoverdialog.setContentView(R.layout.fragment_won);
 
-        nobtn = dialog.findViewById(R.id.nobackbtn);
-        yesbtn = dialog.findViewById(R.id.yesbackbtn);
+        noagainbtn = gameoverdialog.findViewById(R.id.noagainbtn);
+        yesagainbtn = gameoverdialog.findViewById(R.id.yesagainbtn);
 
-        nobtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        yesbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
+        noagainbtn.setOnClickListener(this);
+        yesagainbtn.setOnClickListener(this);
 
         //Makes dialog background transparent instead of default white color.
-        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        gameoverdialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        gameoverdialog.show();
     }
 
     void lost() {
-        final Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.fragment_lost);
+        gameoverdialog = new Dialog(this);
+        gameoverdialog.setContentView(R.layout.fragment_lost);
 
-        nobtn = dialog.findViewById(R.id.lostno);
-        yesbtn = dialog.findViewById(R.id.lostyes);
+        noagainbtn = gameoverdialog.findViewById(R.id.lostno);
+        yesagainbtn = gameoverdialog.findViewById(R.id.lostyes);
 
-        nobtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        yesbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
+        noagainbtn.setOnClickListener(this);
+        yesagainbtn.setOnClickListener(this);
 
         //Makes dialog background transparent instead of default white color.
-        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        gameoverdialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        gameoverdialog.show();
     }
 
     void exit() {
-        final Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.fragment_exit_dialog);
+        backdialog = new Dialog(this);
+        backdialog.setContentView(R.layout.fragment_exit_dialog);
 
-        nobtn = dialog.findViewById(R.id.nobackbtn);
-        yesbtn = dialog.findViewById(R.id.yesbackbtn);
+        nobackbtn = backdialog.findViewById(R.id.nobackbtn);
+        yesbackbtn = backdialog.findViewById(R.id.yesbackbtn);
 
-        nobtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        yesbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
+        nobackbtn.setOnClickListener(this);
+        yesbackbtn.setOnClickListener(this);
 
         //Makes dialog background transparent instead of default white color.
-        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        backdialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        backdialog.show();
 
         /*Test to programmably set the layout according to screen dimensions.
         DisplayMetrics metrics = getResources().getDisplayMetrics();
