@@ -24,16 +24,15 @@ public class ExitDialogFragment extends DialogFragment {
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
+        View v = inflater.inflate(R.layout.fragment_exit_dialog, null);
 
+        nobackbtn = v.findViewById(R.id.nobackbtn);
+        yesbackbtn = v.findViewById(R.id.yesbackbtn);
 
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
-        builder.setView(inflater.inflate(R.layout.fragment_exit_dialog, null));
+        builder.setView(v);
         a = builder.create();
-
-
-        nobackbtn = a.findViewById(R.id.nobackbtn);
-        yesbackbtn = a.findViewById(R.id.yesbackbtn);
 
         nobackbtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(final View v){
