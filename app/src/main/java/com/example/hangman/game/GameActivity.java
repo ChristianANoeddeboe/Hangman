@@ -1,12 +1,17 @@
 package com.example.hangman.game;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.os.AsyncTask;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -23,9 +28,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     EditText guessInput;
     Galgelogik galgelogik;
     InputMethodManager imm;
+    Button nobackbtn, yesbackbtn, yesagainbtn, noagainbtn;
+
+    Dialog backdialog, gameoverdialog;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
@@ -44,8 +52,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         galgelogik = new Galgelogik();
 
-        String word = galgelogik.getSynligtOrd();
-        wordText.setText(word);
+        newgame();
 
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
@@ -61,6 +68,21 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    public void initwords() {
+        class AsyncTaskNetwork extends AsyncTask {
+            @Override
+            protected Object doInBackground(Object... arg0) {
+                try {
+                    galgelogik.hentOrdFraDr();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        }
+        new AsyncTaskNetwork().execute();
+    }
+
     @Override
     public void onClick(View v) {
         if(v == guessbtn) {
@@ -69,6 +91,34 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         if(v == exitbtn) {
             exit();
         }
+        if(v == nobackbtn) {
+            backdialog.dismiss();
+        }
+        if(v == yesbackbtn || v == noagainbtn) {
+            finish();
+        }
+        if(v == yesagainbtn) {
+            //For some reason i have to dismiss it twice.
+            gameoverdialog.dismiss();
+            newgame();
+            gameoverdialog.dismiss();
+        }
+    }
+
+    void newgame() {
+        //Fetches new words.
+        galgelogik.nulstil();
+        initwords();
+
+        //Hides new word
+        String word = galgelogik.getSynligtOrd();
+        wordText.setText(word);
+
+        //Resets picture.
+        levelView.setImageResource(R.drawable.level0);
+
+        //Resets used letters.
+        guessText.setText("");
     }
 
     void guess() {
@@ -103,7 +153,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                         break;
                     case 6:
                         levelView.setImageResource(R.drawable.level6);
-                        gameover(false);
                         break;
                 }
             }
@@ -115,22 +164,74 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
         guessInput.setText("");
         imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-    }
-
-    void checkwon() {
-        if(galgelogik.getSynligtOrd().equals(galgelogik.getOrdet())) {
-            gameover(true);
+        if(galgelogik.erSpilletSlut()) {
+            gameover();
         }
     }
 
-    void gameover(boolean won) {
-        if(won) {
-
+    void gameover() {
+        if(galgelogik.erSpilletVundet()) {
+            won();
         }
+        if(galgelogik.erSpilletTabt()) {
+            lost();
+        }
+    }
+
+    void won() {
+        gameoverdialog = new Dialog(this);
+        gameoverdialog.setContentView(R.layout.fragment_won);
+
+        noagainbtn = gameoverdialog.findViewById(R.id.noagainbtn);
+        yesagainbtn = gameoverdialog.findViewById(R.id.yesagainbtn);
+
+        noagainbtn.setOnClickListener(this);
+        yesagainbtn.setOnClickListener(this);
+
+        //Makes dialog background transparent instead of default white color.
+        gameoverdialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        gameoverdialog.show();
+    }
+
+    void lost() {
+        gameoverdialog = new Dialog(this);
+        gameoverdialog.setContentView(R.layout.fragment_lost);
+
+        noagainbtn = gameoverdialog.findViewById(R.id.lostno);
+        yesagainbtn = gameoverdialog.findViewById(R.id.lostyes);
+
+        noagainbtn.setOnClickListener(this);
+        yesagainbtn.setOnClickListener(this);
+
+        //Makes dialog background transparent instead of default white color.
+        gameoverdialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        gameoverdialog.show();
     }
 
     void exit() {
-        System.out.println("Exit button pressed.");
-        //TODO Brug dialogs her til at lave popup window.
+        backdialog = new Dialog(this);
+        backdialog.setContentView(R.layout.fragment_exit_dialog);
+
+        nobackbtn = backdialog.findViewById(R.id.nobackbtn);
+        yesbackbtn = backdialog.findViewById(R.id.yesbackbtn);
+
+        nobackbtn.setOnClickListener(this);
+        yesbackbtn.setOnClickListener(this);
+
+        //Makes dialog background transparent instead of default white color.
+        backdialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        backdialog.show();
+
+        /*Test to programmably set the layout according to screen dimensions.
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        int width = metrics.widthPixels;
+        int height = metrics.heightPixels;
+        dialog.getWindow().setLayout(width, height);*/
     }
+
+
+
 }

@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         settings = findViewById(R.id.settignsbtn);
         about = findViewById(R.id.aboutbtn);
 
-
         play.setOnClickListener(this);
         highscore.setOnClickListener(this);
         settings.setOnClickListener(this);

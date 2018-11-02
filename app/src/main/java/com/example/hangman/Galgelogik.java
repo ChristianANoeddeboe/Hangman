@@ -78,7 +78,8 @@ public class Galgelogik {
     antalForkerteBogstaver = 0;
     spilletErVundet = false;
     spilletErTabt = false;
-    ordet = muligeOrd.get(new Random().nextInt(muligeOrd.size()));
+    //ordet = muligeOrd.get(new Random().nextInt(muligeOrd.size()));
+    ordet = "bo";
     opdaterSynligtOrd();
   }
 
@@ -156,7 +157,7 @@ public class Galgelogik {
 
   public void hentOrdFraDr() throws Exception {
     String data = hentUrl("https://dr.dk");
-    //System.out.println("data = " + data);
+    System.out.println("data = " + data);
 
     data = data.substring(data.indexOf("<body")). // fjern headere
             replaceAll("<.+?>", " ").toLowerCase(). // fjern tags
