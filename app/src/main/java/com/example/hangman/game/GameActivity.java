@@ -53,9 +53,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         initwords();
 
-        String word = galgelogik.getSynligtOrd();
-        wordText.setText(word);
-
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
         guessInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -76,6 +73,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             protected Object doInBackground(Object... arg0) {
                 try {
                     galgelogik.hentOrdFraDr();
+                    String word = galgelogik.getSynligtOrd();
+                    wordText.setText(word);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -174,7 +173,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         dialog.show();
 
         //Makes dialog background transparent instead of default white color.
-        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialogbackground);
     }
 
     void lost() {
@@ -199,10 +198,28 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         dialog.show();
 
         //Makes dialog background transparent instead of default white color.
-        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialogbackground);
     }
 
     void exit() {
+        ExitDialogFragment exit = new ExitDialogFragment();
+        exit.show(getSupportFragmentManager(),"Exit");
+
+        nobackbtn = exit.getView().findViewById(R.id.nobackbtn);
+        yesbackbtn = exit.getView().findViewById(R.id.yesbackbtn);
+
+        nobackbtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(final View v){
+                System.out.println("no");
+            }
+        });
+        yesbackbtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(final View v) {
+                System.out.println("Yes");
+            }
+        });
+
+        /*
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.fragment_exit_dialog);
 
@@ -224,7 +241,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         dialog.show();
 
         //Makes dialog background transparent instead of default white color.
-        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialogbackground);*/
 
         /*Test to programmably set the layout according to screen dimensions.
         DisplayMetrics metrics = getResources().getDisplayMetrics();
