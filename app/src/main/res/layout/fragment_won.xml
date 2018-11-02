@@ -19,21 +19,71 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
         android:gravity="center"
-        android:text="@string/exit_confirm1"
+        android:text="@string/wontitle"
         android:textColor="@android:color/black"
         android:textSize="36sp"
         app:fontFamily="@font/malisemibold" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center"
+        android:text="@string/guesses"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        app:fontFamily="@font/maliregular" />
+
+    <TextView
+        android:id="@+id/wrongguess"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center"
+        android:text="#"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        app:fontFamily="@font/maliregular" />
+
+    <TextView
+        android:id="@+id/timeusedtxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center"
+        android:text="@string/time"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        app:fontFamily="@font/maliregular" />
+
+    <TextView
+        android:id="@+id/timeused"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
         android:gravity="center"
-        android:text="@string/exit_confirm2"
+        android:text="#"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        app:fontFamily="@font/maliregular" />
+
+    <TextView
+        android:id="@+id/playagain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="@string/again"
         android:textColor="@android:color/black"
         android:textSize="24sp"
         app:fontFamily="@font/malisemibold" />

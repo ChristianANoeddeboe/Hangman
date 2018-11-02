@@ -9,4 +9,13 @@
 
     <string name="yes">YES</string>
     <string name="no">NO</string>
+
+    <string name="wontitle">YOU WON!</string>
+    <string name="guesses">WRONG GUESSES:</string>
+    <string name="time">TIME USED:</string>
+
+    <string name="losttitle">YOU LOST..</string>
+
+    <string name="again">PLAY AGAIN?</string>
+
 </resources>

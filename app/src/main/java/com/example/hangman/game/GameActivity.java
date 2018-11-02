@@ -127,7 +127,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                         break;
                     case 6:
                         levelView.setImageResource(R.drawable.level6);
-                        gameover(false);
                         break;
                 }
             }
@@ -139,25 +138,71 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
         guessInput.setText("");
         imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-    }
-
-    void checkwon() {
-        if(galgelogik.getSynligtOrd().equals(galgelogik.getOrdet())) {
-            gameover(true);
+        if(galgelogik.erSpilletSlut()) {
+            gameover();
         }
     }
 
-    void gameover(boolean won) {
-        if(won) {
-
+    void gameover() {
+        if(galgelogik.erSpilletVundet()) {
+            won();
         }
+        if(galgelogik.erSpilletTabt()) {
+            lost();
+        }
+    }
+
+    void won() {
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.fragment_won);
+
+        nobackbtn = dialog.findViewById(R.id.nobackbtn);
+        yesbackbtn = dialog.findViewById(R.id.yesbackbtn);
+
+        nobackbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        yesbackbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+
+        //Makes dialog background transparent instead of default white color.
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+    }
+
+    void lost() {
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.fragment_lost);
+
+        nobackbtn = dialog.findViewById(R.id.nobackbtn);
+        yesbackbtn = dialog.findViewById(R.id.yesbackbtn);
+
+        nobackbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        yesbackbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+
+        //Makes dialog background transparent instead of default white color.
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
     }
 
     void exit() {
-        DisplayMetrics metrics = getResources().getDisplayMetrics();
-        int width = metrics.widthPixels;
-        int height = metrics.heightPixels;
-
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.fragment_exit_dialog);
 
@@ -177,8 +222,15 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
         dialog.show();
-        //dialog.getWindow().setLayout(width, height);
+
+        //Makes dialog background transparent instead of default white color.
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        /*Test to programmably set the layout according to screen dimensions.
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        int width = metrics.widthPixels;
+        int height = metrics.heightPixels;
+        dialog.getWindow().setLayout(width, height);*/
     }
 
 
