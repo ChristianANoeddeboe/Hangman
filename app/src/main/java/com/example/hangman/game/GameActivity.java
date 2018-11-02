@@ -19,7 +19,6 @@ import android.widget.TextView;
 
 import com.example.hangman.Galgelogik;
 import com.example.hangman.R;
-import com.example.hangman.game.fragment.ExitDialogFragment;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -29,7 +28,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     EditText guessInput;
     Galgelogik galgelogik;
     InputMethodManager imm;
-    Button nobackbtn, yesbackbtn;
+    Button nobtn, yesbtn;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -156,16 +155,16 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.fragment_won);
 
-        nobackbtn = dialog.findViewById(R.id.nobackbtn);
-        yesbackbtn = dialog.findViewById(R.id.yesbackbtn);
+        nobtn = dialog.findViewById(R.id.nobackbtn);
+        yesbtn = dialog.findViewById(R.id.yesbackbtn);
 
-        nobackbtn.setOnClickListener(new View.OnClickListener() {
+        nobtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
             }
         });
-        yesbackbtn.setOnClickListener(new View.OnClickListener() {
+        yesbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
@@ -181,16 +180,16 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.fragment_lost);
 
-        nobackbtn = dialog.findViewById(R.id.nobackbtn);
-        yesbackbtn = dialog.findViewById(R.id.yesbackbtn);
+        nobtn = dialog.findViewById(R.id.lostno);
+        yesbtn = dialog.findViewById(R.id.lostyes);
 
-        nobackbtn.setOnClickListener(new View.OnClickListener() {
+        nobtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
             }
         });
-        yesbackbtn.setOnClickListener(new View.OnClickListener() {
+        yesbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
@@ -206,16 +205,16 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.fragment_exit_dialog);
 
-        nobackbtn = dialog.findViewById(R.id.nobackbtn);
-        yesbackbtn = dialog.findViewById(R.id.yesbackbtn);
+        nobtn = dialog.findViewById(R.id.nobackbtn);
+        yesbtn = dialog.findViewById(R.id.yesbackbtn);
 
-        nobackbtn.setOnClickListener(new View.OnClickListener() {
+        nobtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
             }
         });
-        yesbackbtn.setOnClickListener(new View.OnClickListener() {
+        yesbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
