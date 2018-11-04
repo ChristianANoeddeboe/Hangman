@@ -3,17 +3,22 @@ package com.example.hangman;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.example.hangman.game.GameActivity;
+import com.example.hangman.highscore.HighscoreActivity;
+import com.example.hangman.highscore.fragment.HighscoreFragment;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     ImageButton play, highscore, settings, about;
     ImageView logo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if(v == highscore) {
             System.out.println("Highscore pressed");
+            Intent highscoreList = new Intent(this, HighscoreActivity.class);
+            startActivity(highscoreList);
         }
         if(v == settings) {
             System.out.println("Settings pressed");

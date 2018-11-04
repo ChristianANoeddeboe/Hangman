@@ -18,4 +18,8 @@
 
     <string name="again">PLAY AGAIN?</string>
 
+    <string name="highscoretitle">HIGHSCORES</string>
+
+    <string name="back">BACK</string>
+
 </resources>
