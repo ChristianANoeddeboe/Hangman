@@ -59,7 +59,7 @@ public class Highscores {
             @Override
             protected Object doInBackground(Object... arg0) {
                 try {
-                    JSONreadwrite
+                    JSONreadwrite.getInstance().writeData();
 
                 } catch (Exception e) {
                     e.printStackTrace();
