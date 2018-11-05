@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(game);
         }
         if(v == highscore) {
-            System.out.println("Highscore pressed");
             Intent highscoreList = new Intent(this, HighscoreActivity.class);
             startActivity(highscoreList);
         }

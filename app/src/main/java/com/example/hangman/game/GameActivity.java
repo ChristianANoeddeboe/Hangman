@@ -2,11 +2,11 @@ package com.example.hangman.game;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.hangman.Galgelogik;
 import com.example.hangman.R;
+import com.example.hangman.highscore.data.Highscores;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -31,6 +32,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     Button nobackbtn, yesbackbtn, yesagainbtn, noagainbtn;
 
     Dialog backdialog, gameoverdialog;
+    SharedPreferences prefs;
+
+    Highscores highscores;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,6 +70,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 return true;
             }
         });
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
     }
 
     public void initwords() {
@@ -179,6 +185,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     void won() {
+
+
         gameoverdialog = new Dialog(this);
         gameoverdialog.setContentView(R.layout.fragment_won);
 

@@ -1,6 +1,9 @@
 package com.example.hangman.highscore.data;
 
 import android.content.Context;
+import android.os.AsyncTask;
+
+import com.example.hangman.utilities.JSONreadwrite;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -9,10 +12,18 @@ import java.util.Collections;
 
 public class Highscores {
 
-    ArrayList<Player> playerscores = new ArrayList<>();
+    private ArrayList<Player> playerscores = new ArrayList<>();
+    private Highscores highscores;
 
-    public Highscores() {
+    private Highscores() {
         testData();
+    }
+
+    public Highscores getInstance() {
+        if(highscores == null) {
+            highscores = new Highscores();
+        }
+        return highscores;
     }
 
     public void addScore(String word, int guesses) {
@@ -44,7 +55,19 @@ public class Highscores {
     }
 
     public void writeHighscore() {
-        //File scorelist = new File("Hangman")
+        class WriteScoreCSV extends AsyncTask {
+            @Override
+            protected Object doInBackground(Object... arg0) {
+                try {
+                    JSONreadwrite
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        }
+        new WriteScoreCSV().execute();
     }
 
 
