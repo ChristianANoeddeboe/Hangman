@@ -1,4 +1,4 @@
-package com.example.hangman.highscore.fragment;
+/*package com.example.hangman.highscore.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,25 +8,15 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.hangman.R;
-import com.example.hangman.highscore.data.Highscores;
 
-import java.util.ArrayList;
-
-/**
- * Unused fragment.
- * TODO Remove this
- */
 
 public class HighscoreFragment extends Fragment {
 
     RecyclerView recyclerView;
-    Highscores highscores = new Highscores();
 
     public HighscoreFragment() {
         // Required empty public constructor
@@ -117,3 +107,4 @@ public class HighscoreFragment extends Fragment {
 
     };
 }
+*/

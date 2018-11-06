@@ -35,11 +35,7 @@ public class JSONreadwrite extends AppCompatActivity {
     }
 
     public void writeData(String word, int score) throws JSONException, IOException {
-        JSONObject json = new JSONObject();
-        json.put("word", word);
-        json.put("score", score);
 
-        System.out.println(json.toString());
 
         //this.fileName = fileName;
         //filePath = baseDir + File.separator + fileName;

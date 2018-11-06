@@ -27,6 +27,7 @@ public class CSVParser extends AppCompatActivity {
         return csvParser;
     }
 
+    /*
     public void writeCSV(String fileName, ) throws IOException {
         this.fileName = fileName;
         filePath = baseDir + File.separator + fileName;
@@ -40,8 +41,8 @@ public class CSVParser extends AppCompatActivity {
 
         writer.
 
-    }
-
+    }*/
+/*
     public void exportEmailInCSV() throws IOException {
         {
 

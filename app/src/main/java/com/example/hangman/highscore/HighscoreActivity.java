@@ -1,6 +1,5 @@
 package com.example.hangman.highscore;
 
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,12 +8,10 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.hangman.R;
-import com.example.hangman.highscore.data.Highscores;
-import com.example.hangman.highscore.fragment.HighscoreFragment;
+import com.example.hangman.data.Highscores;
 
 public class HighscoreActivity extends AppCompatActivity implements View.OnClickListener {
 
-    //FragmentManager fragmentManager;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -34,26 +31,13 @@ public class HighscoreActivity extends AppCompatActivity implements View.OnClick
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        highscores = new Highscores();
+        highscores = Highscores.getInstance(this);
 
         adapter = new HighscoreAdapter(highscores.getPlayerscores());
         recyclerView.setAdapter(adapter);
 
         backbtn = findViewById(R.id.backbtn);
         backbtn.setOnClickListener(this);
-
-        /*
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.highscorelistcontainer, new HighscoreFragment())  // tom container i layout
-                .commit();
-                */
-            /*
-            fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                    .show(new HighscoreFragment())
-                    .commit();
-                    */
 
     }
 

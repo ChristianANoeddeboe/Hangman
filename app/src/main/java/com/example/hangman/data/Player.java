@@ -1,4 +1,4 @@
-package com.example.hangman.highscore.data;
+package com.example.hangman.data;
 
 public class Player implements Comparable {
 

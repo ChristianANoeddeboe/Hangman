@@ -19,7 +19,10 @@ import android.widget.TextView;
 
 import com.example.hangman.Galgelogik;
 import com.example.hangman.R;
-import com.example.hangman.highscore.data.Highscores;
+import com.example.hangman.data.Highscores;
+import com.example.hangman.data.Player;
+
+import java.util.TreeSet;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -32,7 +35,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     Button nobackbtn, yesbackbtn, yesagainbtn, noagainbtn;
 
     Dialog backdialog, gameoverdialog;
-    SharedPreferences prefs;
 
     Highscores highscores;
 
@@ -54,6 +56,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         guessInput = findViewById(R.id.guessInput);
 
+        highscores = Highscores.getInstance(this);
+
         galgelogik = new Galgelogik();
 
         newgame();
@@ -70,8 +74,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 return true;
             }
         });
-
-        prefs = PreferenceManager.getDefaultSharedPreferences(this);
     }
 
     public void initwords() {
@@ -104,10 +106,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             finish();
         }
         if(v == yesagainbtn) {
-            //For some reason i have to dismiss it twice.
             gameoverdialog.dismiss();
             newgame();
-            gameoverdialog.dismiss();
         }
     }
 
@@ -182,11 +182,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         if(galgelogik.erSpilletTabt()) {
             lost();
         }
+        highscores.addScore(galgelogik.getOrdet(), galgelogik.getBrugteBogstaver().size());
     }
 
+
+
     void won() {
-
-
         gameoverdialog = new Dialog(this);
         gameoverdialog.setContentView(R.layout.fragment_won);
 

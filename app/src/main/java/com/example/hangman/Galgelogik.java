@@ -78,8 +78,8 @@ public class Galgelogik {
     antalForkerteBogstaver = 0;
     spilletErVundet = false;
     spilletErTabt = false;
-    //ordet = muligeOrd.get(new Random().nextInt(muligeOrd.size()));
-    ordet = "bo";
+    ordet = muligeOrd.get(new Random().nextInt(muligeOrd.size()));
+    //ordet = "bo"; // For testing
     opdaterSynligtOrd();
   }
 
