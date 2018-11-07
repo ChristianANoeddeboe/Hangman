@@ -1,4 +1,4 @@
-package com.example.hangman;
+package com.s164150.hangman;
 
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.module.AppGlideModule;

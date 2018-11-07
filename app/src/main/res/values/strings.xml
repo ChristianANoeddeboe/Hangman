@@ -12,7 +12,7 @@
 
     <string name="wontitle">YOU WON!</string>
     <string name="guesses">TOTAL GUESSES:</string>
-    <string name="time">SCORE:</string>
+    <string name="score">SCORE:</string>
 
     <string name="losttitle">YOU LOST..</string>
 

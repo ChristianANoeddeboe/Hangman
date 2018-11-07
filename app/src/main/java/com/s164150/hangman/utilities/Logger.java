@@ -1,4 +1,4 @@
-package com.example.hangman.utilities;
+package com.s164150.hangman.utilities;
 
 import java.io.*;
 import java.time.LocalDateTime;

@@ -1,4 +1,4 @@
-package com.example.hangman;
+package com.s164150.hangman;
 
 
 import android.content.Intent;
@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import com.example.hangman.game.GameActivity;
-import com.example.hangman.highscore.HighscoreActivity;
+import com.s164150.hangman.game.GameActivity;
+import com.s164150.hangman.highscore.HighscoreActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 

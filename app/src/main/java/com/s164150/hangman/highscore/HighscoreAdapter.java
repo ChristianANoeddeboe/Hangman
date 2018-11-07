@@ -1,4 +1,4 @@
-package com.example.hangman.highscore;
+package com.s164150.hangman.highscore;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,8 +6,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.hangman.R;
-import com.example.hangman.data.Player;
+import com.s164150.hangman.R;
+import com.s164150.hangman.data.Player;
 
 import java.util.ArrayList;
 
