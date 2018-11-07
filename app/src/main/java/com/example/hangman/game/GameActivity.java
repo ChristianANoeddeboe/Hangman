@@ -188,11 +188,19 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
 
     void won() {
+        //TODO Change this to a new activity.
+        TextView numscore, numguess;
         gameoverdialog = new Dialog(this);
         gameoverdialog.setContentView(R.layout.fragment_won);
 
         noagainbtn = gameoverdialog.findViewById(R.id.noagainbtn);
         yesagainbtn = gameoverdialog.findViewById(R.id.yesagainbtn);
+
+        numscore = gameoverdialog.findViewById(R.id.numscore);
+        numguess = gameoverdialog.findViewById(R.id.numguess);
+
+        numscore.setText(highscores.getLastscore());
+        numguess.setText(galgelogik.getBrugteBogstaver().size());
 
         noagainbtn.setOnClickListener(this);
         yesagainbtn.setOnClickListener(this);
@@ -204,6 +212,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     void lost() {
+        //TODO change to new activity.
         gameoverdialog = new Dialog(this);
         gameoverdialog.setContentView(R.layout.fragment_lost);
 

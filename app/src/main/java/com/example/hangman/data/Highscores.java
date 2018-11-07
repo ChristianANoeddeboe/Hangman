@@ -22,6 +22,7 @@ public class Highscores {
     private static Highscores highscores;
     private SharedPreferences prefs;
     private Context ctx;
+    private int lastscore;
 
     private Highscores(Context ctx) {
         this.ctx = ctx;
@@ -38,6 +39,7 @@ public class Highscores {
 
     public void addScore(String word, int guesses) {
         int score = calculateScore(word,guesses);
+        lastscore = score;
         playerscores.add(new Player(word, score));
         Collections.sort(playerscores);
         saveScore();
@@ -89,33 +91,7 @@ public class Highscores {
         return playerscores;
     }
 
-    public void writeHighscore(Player curr) throws JSONException {
-        JSONObject json = new JSONObject();
-        json.put("word", curr.getWord());
-        json.put("score", curr.getScore());
-
-        System.out.println(json.toString());
-
-
-    }
-
-
-    public void writeFileOnInternalStorage(Context mcoContext, String sFileName, String sBody){
-        File file = new File(mcoContext.getFilesDir(),"mydir");
-        if(!file.exists()){
-            file.mkdir();
-        }
-
-        try{
-            File gpxfile = new File(file, sFileName);
-            FileWriter writer = new FileWriter(gpxfile);
-            writer.append(sBody);
-            writer.flush();
-            writer.close();
-
-        }catch (Exception e){
-            e.printStackTrace();
-
-        }
+    public int getLastscore() {
+        return lastscore;
     }
 }

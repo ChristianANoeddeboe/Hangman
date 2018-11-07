@@ -26,7 +26,7 @@
         app:fontFamily="@font/malisemibold" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/totalguesstext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -38,7 +38,7 @@
         app:fontFamily="@font/maliregular" />
 
     <TextView
-        android:id="@+id/wrongguess"
+        android:id="@+id/numguess"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -50,7 +50,7 @@
         app:fontFamily="@font/maliregular" />
 
     <TextView
-        android:id="@+id/timeusedtxt"
+        android:id="@+id/scoretext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -62,7 +62,7 @@
         app:fontFamily="@font/maliregular" />
 
     <TextView
-        android:id="@+id/timeused"
+        android:id="@+id/numscore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
