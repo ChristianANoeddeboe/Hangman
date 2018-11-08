@@ -38,6 +38,11 @@ public class WonFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-
+        if(v == noagainbtn) {
+            getActivity().finish();
+        }
+        if(v == yesagainbtn) {
+            getFragmentManager().popBackStack();
+        }
     }
 }

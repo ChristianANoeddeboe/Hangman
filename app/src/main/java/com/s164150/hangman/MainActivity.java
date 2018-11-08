@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageButton play, highscore, settings, about;
     ImageView logo;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
