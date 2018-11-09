@@ -163,7 +163,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         args.putInt("score",highscores.getLastscore());
         wonFragment.setArguments(args);
         getFragmentManager().beginTransaction()
-                .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
                 .replace(R.id.overlaycontainer, wonFragment)
                 .addToBackStack(null)
                 .commit();
@@ -176,7 +175,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         args.putCharSequence("word",galgelogik.getOrdet());
         lostFragment.setArguments(args);
         getFragmentManager().beginTransaction()
-                .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
                 .replace(R.id.overlaycontainer, lostFragment)
                 .addToBackStack(null)
                 .commit();

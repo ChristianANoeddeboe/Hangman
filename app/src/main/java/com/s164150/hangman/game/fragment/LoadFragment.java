@@ -34,7 +34,6 @@ public class LoadFragment extends Fragment {
                 }
                 Fragment gameFragment = new GameFragment();
                 getFragmentManager().beginTransaction()
-                        .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
                         .replace(R.id.fragcontainer, gameFragment)  // tom container i layout
                         .commit();
                 return null;

@@ -20,7 +20,6 @@ public class Highscores {
     private Highscores(Context ctx) {
         this.ctx = ctx;
         readScore();
-        //testData();
     }
 
     public static Highscores getInstance(Context ctx) {
@@ -65,8 +64,6 @@ public class Highscores {
 
     private void saveScore() {
         prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
-        //TreeSet<String> word = new TreeSet<>();
-        //TreeSet<String> score = new TreeSet<>();
 
         String words = "";
         String scores = "";
@@ -76,14 +73,10 @@ public class Highscores {
         for(int i = 0 ; i < size-1 ; i++) {
             words += playerscores.get(i).getWord()+",";
             scores += playerscores.get(i).getScore()+",";
-            //word.add(player.getWord());
-            //score.add(String.valueOf(player.getScore()));
         }
         words += playerscores.get(size-1).getWord();
         scores += playerscores.get(size-1).getScore();
 
-        //prefs.edit().putStringSet("WORD",word).apply();
-        //prefs.edit().putStringSet("SCORE",score).apply();
         prefs.edit().putString("WORD",words).apply();
         prefs.edit().putString("SCORE",scores).apply();
     }
@@ -92,32 +85,11 @@ public class Highscores {
         prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
         String wordstemp = prefs.getString("WORD", "Play to add scores!");
         String scorestemp = prefs.getString("SCORE","0");
-        //Set<String> tempword = prefs.getStringSet("WORD",new TreeSet<String>());
-        //Set<String> tempscore = prefs.getStringSet("SCORE",new TreeSet<String>());
-        //TreeSet<String> word = new TreeSet<>(tempword);
-        //TreeSet<String> score = new TreeSet<>(tempscore);
         String[] words;
         String[] scores;
 
         words = wordstemp.split(",");
         scores = scorestemp.split(",");
-
-        /*
-        if(wordstemp.contains(",")) {
-            words = wordstemp.split(",");
-            size = words.length;
-        } else {
-            words = new String[]{wordstemp};
-        }
-        if(scorestemp.contains(",")) {
-            scores = scorestemp.split(",");
-        } else {
-            scores = new String[]{scorestemp};
-        }*/
-
-        /*for(int i = 0 ; i < word.size() ; i++) {
-            playerscores.add(new Player(word.iterator().next(), Integer.parseInt(score.iterator().next())));
-        }*/
 
         for(int i = 0 ; i < words.length ; i++) {
             playerscores.add(new Player(words[i],Integer.parseInt(scores[i])));

@@ -9,7 +9,6 @@ import com.s164150.hangman.game.fragment.LoadFragment;
 
 public class GameActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,5 +20,10 @@ public class GameActivity extends AppCompatActivity {
                     .add(R.id.fragcontainer, loadFragment)
                     .commit();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        //Used to disable back button in the game, such people wouldn't interrupt their game.
     }
 }
