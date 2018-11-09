@@ -15,3 +15,4 @@ The app is a simple hangman game, as we all know and love. The theme is a simple
 - Change look of highscore back button.
 - Add firebase to support multiple players adding scores to highscorelist.
 - Add sound to game, both when won, but also ambient while playing.
+- Add difficult setting (Easy, normal, hard).
