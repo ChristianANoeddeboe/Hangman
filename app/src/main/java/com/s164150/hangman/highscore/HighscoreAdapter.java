@@ -17,7 +17,6 @@ public class HighscoreAdapter extends RecyclerView.Adapter<HighscoreAdapter.High
     private TextView word, score;
 
     public static class HighscoreViewHolder extends  RecyclerView.ViewHolder {
-        // each data item is just a string in this case
         public LinearLayout view;
         public HighscoreViewHolder(LinearLayout v) {
             super(v);
@@ -25,28 +24,19 @@ public class HighscoreAdapter extends RecyclerView.Adapter<HighscoreAdapter.High
         }
     }
 
-    // Provide a suitable constructor (depends on the kind of dataset)
     public HighscoreAdapter(ArrayList<Player> dataSet) {
         highscoreDataSet = dataSet;
     }
 
-    // Create new views (invoked by the layout manager)
     @Override
     public HighscoreAdapter.HighscoreViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // create a new view
         LinearLayout v = (LinearLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.highscore_list_element, parent, false);
-
-
 
         return new HighscoreViewHolder(v);
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(HighscoreViewHolder holder, int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
-
         word = holder.view.findViewById(R.id.highscoreword);
         score = holder.view.findViewById(R.id.highscorescore);
 
@@ -54,10 +44,11 @@ public class HighscoreAdapter extends RecyclerView.Adapter<HighscoreAdapter.High
         word.setText(data);
 
         data = String.valueOf(highscoreDataSet.get(position).getScore());
-        score.setText(data);
+        if(!data.equals("0")) {
+            score.setText(data);
+        }
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return highscoreDataSet.size();

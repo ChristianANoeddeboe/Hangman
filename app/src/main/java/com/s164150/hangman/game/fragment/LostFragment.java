@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.s164150.hangman.R;
 
@@ -13,6 +14,7 @@ public class LostFragment extends Fragment implements View.OnClickListener {
 
     Button noagainbtn, yesagainbtn;
     ViewGroup container;
+    TextView wordwas;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -22,8 +24,14 @@ public class LostFragment extends Fragment implements View.OnClickListener {
         noagainbtn = parent.findViewById(R.id.lostno);
         yesagainbtn = parent.findViewById(R.id.lostyes);
 
+        wordwas = parent.findViewById(R.id.wordwas);
+
         int color = getResources().getColor(R.color.overlayBackground);
         container.setBackgroundColor(color);
+
+        String word = (String) getArguments().getCharSequence("word");
+        word = word.toUpperCase();
+        wordwas.setText(word);
 
         noagainbtn.setOnClickListener(this);
         yesagainbtn.setOnClickListener(this);
