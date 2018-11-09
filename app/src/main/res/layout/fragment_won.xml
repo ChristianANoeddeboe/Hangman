@@ -11,7 +11,7 @@
     android:background="@drawable/dialogbackground"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".game.fragment.ExitDialogFragment">
+    tools:context=".game.fragment.GameFragment">
 
     <TextView
         android:id="@+id/textView"
@@ -26,7 +26,7 @@
         app:fontFamily="@font/malisemibold" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/totalguesstext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -38,7 +38,7 @@
         app:fontFamily="@font/maliregular" />
 
     <TextView
-        android:id="@+id/wrongguess"
+        android:id="@+id/numguess"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -50,19 +50,19 @@
         app:fontFamily="@font/maliregular" />
 
     <TextView
-        android:id="@+id/timeusedtxt"
+        android:id="@+id/scoretext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:gravity="center"
-        android:text="@string/time"
+        android:text="@string/score"
         android:textColor="@android:color/black"
         android:textSize="24sp"
         app:fontFamily="@font/maliregular" />
 
     <TextView
-        android:id="@+id/timeused"
+        android:id="@+id/numscore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -95,7 +95,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/yesagainbtn"
+            android:id="@+id/wonyes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
@@ -109,7 +109,7 @@
             app:fontFamily="@font/malisemibold" />
 
         <Button
-            android:id="@+id/noagainbtn"
+            android:id="@+id/wonno"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"

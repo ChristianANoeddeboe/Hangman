@@ -1,4 +1,4 @@
-package com.example.hangman;
+package com.s164150.hangman;
 
 
 import android.content.Intent;
@@ -8,7 +8,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import com.example.hangman.game.GameActivity;
+import com.s164150.hangman.game.GameActivity;
+import com.s164150.hangman.highscore.HighscoreActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -42,7 +43,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(game);
         }
         if(v == highscore) {
-            System.out.println("Highscore pressed");
+            Intent highscoreList = new Intent(this, HighscoreActivity.class);
+            startActivity(highscoreList);
         }
         if(v == settings) {
             System.out.println("Settings pressed");

@@ -1,15 +1,14 @@
-package com.example.hangman.game.fragment;
+package com.s164150.hangman.game.fragment;
 
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.widget.Button;
 import android.view.View;
 
-import com.example.hangman.R;
+import com.s164150.hangman.R;
 
 public class ExitDialogFragment extends DialogFragment {
 

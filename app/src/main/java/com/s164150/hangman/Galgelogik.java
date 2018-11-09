@@ -1,4 +1,4 @@
-package com.example.hangman;
+package com.s164150.hangman;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -79,7 +79,7 @@ public class Galgelogik {
     spilletErVundet = false;
     spilletErTabt = false;
     //ordet = muligeOrd.get(new Random().nextInt(muligeOrd.size()));
-    ordet = "bo";
+    ordet = "bo"; // For testing
     opdaterSynligtOrd();
   }
 

@@ -1,26 +1,29 @@
-package com.example.hangman.game;
+package com.s164150.hangman.game.fragment;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.SystemClock;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
+import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.hangman.Galgelogik;
-import com.example.hangman.R;
+import com.s164150.hangman.Galgelogik;
+import com.s164150.hangman.R;
+import com.s164150.hangman.data.Highscores;
 
-public class GameActivity extends AppCompatActivity implements View.OnClickListener {
+public class GameFragment extends Fragment implements View.OnClickListener {
 
     ImageButton exitbtn, guessbtn;
     ImageView levelView;
@@ -28,33 +31,40 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     EditText guessInput;
     Galgelogik galgelogik;
     InputMethodManager imm;
-    Button nobackbtn, yesbackbtn, yesagainbtn, noagainbtn;
+    Button nobackbtn, yesbackbtn;
+    //Button yesagainbtn, noagainbtn;
 
-    Dialog backdialog, gameoverdialog;
+    //Dialog backdialog, gameoverdialog;
+    Dialog backdialog;
+
+
+
+    Highscores highscores;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View parent = inflater.inflate(R.layout.fragment_game, container, false);
 
-        exitbtn = findViewById(R.id.exitbtn);
-        guessbtn = findViewById(R.id.guessbtn);
+        exitbtn = parent.findViewById(R.id.exitbtn);
+        guessbtn = parent.findViewById(R.id.guessbtn);
 
         exitbtn.setOnClickListener(this);
         guessbtn.setOnClickListener(this);
 
-        levelView = findViewById(R.id.levelView);
+        levelView = parent.findViewById(R.id.levelView);
 
-        wordText = findViewById(R.id.wordText);
-        guessText = findViewById(R.id.guessText);
+        wordText = parent.findViewById(R.id.wordText);
+        guessText = parent.findViewById(R.id.guessText);
 
-        guessInput = findViewById(R.id.guessInput);
+        guessInput = parent.findViewById(R.id.guessInput);
 
         galgelogik = new Galgelogik();
 
+        highscores = Highscores.getInstance(getActivity());
+
         newgame();
 
-        imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
         guessInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             //TODO Make GBoard keyboard work with 'enter' button
@@ -66,6 +76,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 return true;
             }
         });
+        return parent;
     }
 
     public void initwords() {
@@ -91,18 +102,21 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         if(v == exitbtn) {
             exit();
         }
+        if(v == yesbackbtn) {
+            getActivity().finish();
+        }
+        /*
         if(v == nobackbtn) {
             backdialog.dismiss();
         }
         if(v == yesbackbtn || v == noagainbtn) {
-            finish();
+            getActivity().finish();
         }
         if(v == yesagainbtn) {
-            //For some reason i have to dismiss it twice.
             gameoverdialog.dismiss();
             newgame();
-            gameoverdialog.dismiss();
         }
+        */
     }
 
     void newgame() {
@@ -163,7 +177,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             guessText.setText(temp);
         }
         guessInput.setText("");
-        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
         if(galgelogik.erSpilletSlut()) {
             gameover();
         }
@@ -171,6 +185,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     void gameover() {
         if(galgelogik.erSpilletVundet()) {
+            highscores.addScore(galgelogik.getOrdet(), galgelogik.getBrugteBogstaver().size());
             won();
         }
         if(galgelogik.erSpilletTabt()) {
@@ -179,23 +194,34 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     void won() {
-        gameoverdialog = new Dialog(this);
-        gameoverdialog.setContentView(R.layout.fragment_won);
-
-        noagainbtn = gameoverdialog.findViewById(R.id.noagainbtn);
-        yesagainbtn = gameoverdialog.findViewById(R.id.yesagainbtn);
-
-        noagainbtn.setOnClickListener(this);
-        yesagainbtn.setOnClickListener(this);
-
-        //Makes dialog background transparent instead of default white color.
-        gameoverdialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-
-        gameoverdialog.show();
+        WonFragment wonFragment = new WonFragment();
+        Bundle args = new Bundle();
+        args.putInt("guess",galgelogik.getBrugteBogstaver().size());
+        args.putInt("score",highscores.getLastscore());
+        wonFragment.setArguments(args);
+        getFragmentManager().beginTransaction()
+                .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                .replace(R.id.overlaycontainer, wonFragment)
+                .addToBackStack(null)
+                .commit();
+        newgame();
     }
 
     void lost() {
-        gameoverdialog = new Dialog(this);
+
+        Fragment lostFragment = new LostFragment();
+        getFragmentManager().beginTransaction()
+                .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                .replace(R.id.overlaycontainer, lostFragment)
+                .addToBackStack(null)
+                .commit();
+        newgame();
+    }
+
+    /*
+    void lost() {
+        //TODO change to new activity.
+        gameoverdialog = new Dialog(getActivity());
         gameoverdialog.setContentView(R.layout.fragment_lost);
 
         noagainbtn = gameoverdialog.findViewById(R.id.lostno);
@@ -209,9 +235,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         gameoverdialog.show();
     }
+    */
 
     void exit() {
-        backdialog = new Dialog(this);
+        backdialog = new Dialog(getActivity());
         backdialog.setContentView(R.layout.fragment_exit_dialog);
 
         nobackbtn = backdialog.findViewById(R.id.nobackbtn);
@@ -231,7 +258,4 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         int height = metrics.heightPixels;
         dialog.getWindow().setLayout(width, height);*/
     }
-
-
-
 }
