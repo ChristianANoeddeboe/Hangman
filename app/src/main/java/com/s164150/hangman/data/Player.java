@@ -2,7 +2,7 @@ package com.s164150.hangman.data;
 
 public class Player implements Comparable {
 
-    private String name;
+    private String name; //Used later, when multiple players scores are shown
     private String word;
     private int score;
 

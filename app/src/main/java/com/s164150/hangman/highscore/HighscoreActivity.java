@@ -24,10 +24,6 @@ public class HighscoreActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_highscore);
         recyclerView = findViewById(R.id.highscorelist);
 
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        recyclerView.setHasFixedSize(true);
-
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 

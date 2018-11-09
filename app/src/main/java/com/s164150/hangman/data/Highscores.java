@@ -31,11 +31,19 @@ public class Highscores {
     }
 
     public void addScore(String word, int guesses) {
+        removeinfo();
         int score = calculateScore(word,guesses);
         lastscore = score;
         playerscores.add(new Player(word, score));
         Collections.sort(playerscores);
         saveScore();
+    }
+
+    private void removeinfo() {
+        Player last = playerscores.get(playerscores.size()-1);
+        if(last.getScore() == 0) {
+            playerscores.remove(last);
+        }
     }
 
     public void testData() {
@@ -57,26 +65,62 @@ public class Highscores {
 
     private void saveScore() {
         prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
-        TreeSet<String> word = new TreeSet<>();
-        TreeSet<String> score = new TreeSet<>();
+        //TreeSet<String> word = new TreeSet<>();
+        //TreeSet<String> score = new TreeSet<>();
 
-        for(Player player : highscores.getPlayerscores()) {
-            word.add(player.getWord());
-            score.add(String.valueOf(player.getScore()));
+        String words = "";
+        String scores = "";
+
+        int size = playerscores.size();
+
+        for(int i = 0 ; i < size-1 ; i++) {
+            words += playerscores.get(i).getWord()+",";
+            scores += playerscores.get(i).getScore()+",";
+            //word.add(player.getWord());
+            //score.add(String.valueOf(player.getScore()));
         }
-        prefs.edit().putStringSet("WORD",word).apply();
-        prefs.edit().putStringSet("SCORE",score).apply();
+        words += playerscores.get(size-1).getWord();
+        scores += playerscores.get(size-1).getScore();
+
+        //prefs.edit().putStringSet("WORD",word).apply();
+        //prefs.edit().putStringSet("SCORE",score).apply();
+        prefs.edit().putString("WORD",words).apply();
+        prefs.edit().putString("SCORE",scores).apply();
     }
 
     private void readScore() {
         prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
-        Set<String> tempword = prefs.getStringSet("WORD",new TreeSet<String>());
-        Set<String> tempscore = prefs.getStringSet("SCORE",new TreeSet<String>());
-        TreeSet<String> word = new TreeSet<>(tempword);
-        TreeSet<String> score = new TreeSet<>(tempscore);
+        String wordstemp = prefs.getString("WORD", "Play to add scores!");
+        String scorestemp = prefs.getString("SCORE","0");
+        //Set<String> tempword = prefs.getStringSet("WORD",new TreeSet<String>());
+        //Set<String> tempscore = prefs.getStringSet("SCORE",new TreeSet<String>());
+        //TreeSet<String> word = new TreeSet<>(tempword);
+        //TreeSet<String> score = new TreeSet<>(tempscore);
+        String[] words;
+        String[] scores;
 
-        for(int i = 0 ; i < word.size() ; i++) {
+        words = wordstemp.split(",");
+        scores = scorestemp.split(",");
+
+        /*
+        if(wordstemp.contains(",")) {
+            words = wordstemp.split(",");
+            size = words.length;
+        } else {
+            words = new String[]{wordstemp};
+        }
+        if(scorestemp.contains(",")) {
+            scores = scorestemp.split(",");
+        } else {
+            scores = new String[]{scorestemp};
+        }*/
+
+        /*for(int i = 0 ; i < word.size() ; i++) {
             playerscores.add(new Player(word.iterator().next(), Integer.parseInt(score.iterator().next())));
+        }*/
+
+        for(int i = 0 ; i < words.length ; i++) {
+            playerscores.add(new Player(words[i],Integer.parseInt(scores[i])));
         }
     }
 

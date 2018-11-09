@@ -2,10 +2,8 @@ package com.s164150.hangman.game.fragment;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +12,6 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,15 +26,13 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     ImageView levelView;
     TextView wordText, guessText;
     EditText guessInput;
-    Galgelogik galgelogik;
-    InputMethodManager imm;
     Button nobackbtn, yesbackbtn;
-    //Button yesagainbtn, noagainbtn;
 
-    //Dialog backdialog, gameoverdialog;
+    InputMethodManager imm;
+
+    Galgelogik galgelogik;
+
     Dialog backdialog;
-
-
 
     Highscores highscores;
 
@@ -58,7 +53,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
         guessInput = parent.findViewById(R.id.guessInput);
 
-        galgelogik = new Galgelogik();
+        galgelogik = Galgelogik.getinstance();
 
         highscores = Highscores.getInstance(getActivity());
 
@@ -79,21 +74,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         return parent;
     }
 
-    public void initwords() {
-        class AsyncTaskNetwork extends AsyncTask {
-            @Override
-            protected Object doInBackground(Object... arg0) {
-                try {
-                    galgelogik.hentOrdFraDr();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-        }
-        new AsyncTaskNetwork().execute();
-    }
-
     @Override
     public void onClick(View v) {
         if(v == guessbtn) {
@@ -105,33 +85,16 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         if(v == yesbackbtn) {
             getActivity().finish();
         }
-        /*
-        if(v == nobackbtn) {
-            backdialog.dismiss();
-        }
-        if(v == yesbackbtn || v == noagainbtn) {
-            getActivity().finish();
-        }
-        if(v == yesagainbtn) {
-            gameoverdialog.dismiss();
-            newgame();
-        }
-        */
     }
 
     void newgame() {
-        //Fetches new words.
         galgelogik.nulstil();
-        initwords();
 
-        //Hides new word
         String word = galgelogik.getSynligtOrd();
         wordText.setText(word);
 
-        //Resets picture.
         levelView.setImageResource(R.drawable.level0);
 
-        //Resets used letters.
         guessText.setText("");
     }
 
@@ -208,8 +171,10 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     }
 
     void lost() {
-
         Fragment lostFragment = new LostFragment();
+        Bundle args = new Bundle();
+        args.putCharSequence("word",galgelogik.getOrdet());
+        lostFragment.setArguments(args);
         getFragmentManager().beginTransaction()
                 .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
                 .replace(R.id.overlaycontainer, lostFragment)
@@ -217,25 +182,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 .commit();
         newgame();
     }
-
-    /*
-    void lost() {
-        //TODO change to new activity.
-        gameoverdialog = new Dialog(getActivity());
-        gameoverdialog.setContentView(R.layout.fragment_lost);
-
-        noagainbtn = gameoverdialog.findViewById(R.id.lostno);
-        yesagainbtn = gameoverdialog.findViewById(R.id.lostyes);
-
-        noagainbtn.setOnClickListener(this);
-        yesagainbtn.setOnClickListener(this);
-
-        //Makes dialog background transparent instead of default white color.
-        gameoverdialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-
-        gameoverdialog.show();
-    }
-    */
 
     void exit() {
         backdialog = new Dialog(getActivity());
@@ -247,15 +193,8 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         nobackbtn.setOnClickListener(this);
         yesbackbtn.setOnClickListener(this);
 
-        //Makes dialog background transparent instead of default white color.
         backdialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
         backdialog.show();
-
-        /*Test to programmably set the layout according to screen dimensions.
-        DisplayMetrics metrics = getResources().getDisplayMetrics();
-        int width = metrics.widthPixels;
-        int height = metrics.heightPixels;
-        dialog.getWindow().setLayout(width, height);*/
     }
 }

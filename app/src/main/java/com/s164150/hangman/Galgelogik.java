@@ -57,8 +57,9 @@ public class Galgelogik {
     return spilletErTabt || spilletErVundet;
   }
 
+  private static Galgelogik galgelogik;
 
-  public Galgelogik() {
+  private Galgelogik() {
     muligeOrd.add("bil");
     muligeOrd.add("computer");
     muligeOrd.add("programmering");
@@ -73,13 +74,20 @@ public class Galgelogik {
     nulstil();
   }
 
+  public static Galgelogik getinstance() {
+    if(galgelogik == null) {
+      galgelogik = new Galgelogik();
+    }
+    return galgelogik;
+  }
+
   public void nulstil() {
     brugteBogstaver.clear();
     antalForkerteBogstaver = 0;
     spilletErVundet = false;
     spilletErTabt = false;
-    //ordet = muligeOrd.get(new Random().nextInt(muligeOrd.size()));
-    ordet = "bo"; // For testing
+    ordet = muligeOrd.get(new Random().nextInt(muligeOrd.size()));
+    //ordet = "bo"; // For testing
     opdaterSynligtOrd();
   }
 

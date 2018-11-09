@@ -24,7 +24,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="right"
-        android:text="TESTSCORE"
         android:textColor="@android:color/black"
         android:textSize="30sp"
         app:fontFamily="@font/malisemibold" />

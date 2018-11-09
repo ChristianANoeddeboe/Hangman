@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.s164150.hangman.R;
-import com.s164150.hangman.game.fragment.GameFragment;
+import com.s164150.hangman.game.fragment.LoadFragment;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -16,13 +16,10 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         if(savedInstanceState == null) {
-            Fragment gameFragment = new GameFragment();
+            Fragment loadFragment = new LoadFragment();
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragcontainer, gameFragment)
+                    .add(R.id.fragcontainer, loadFragment)
                     .commit();
         }
-
-
     }
-
 }

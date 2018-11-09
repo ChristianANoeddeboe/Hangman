@@ -12,15 +12,12 @@ import com.s164150.hangman.R;
 
 public class ExitDialogFragment extends DialogFragment {
 
-    //TODO Make the dimensions of the dialog box fit. Ask next time.
-
     Button nobackbtn, yesbackbtn;
     AlertDialog a;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
         View v = inflater.inflate(R.layout.fragment_exit_dialog, null);
@@ -28,8 +25,6 @@ public class ExitDialogFragment extends DialogFragment {
         nobackbtn = v.findViewById(R.id.nobackbtn);
         yesbackbtn = v.findViewById(R.id.yesbackbtn);
 
-        // Inflate and set the layout for the dialog
-        // Pass null as the parent view because its going in the dialog layout
         builder.setView(v);
         a = builder.create();
 
