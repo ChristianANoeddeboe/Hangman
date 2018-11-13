@@ -85,6 +85,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         if(v == yesbackbtn) {
             getActivity().finish();
         }
+        if(v == nobackbtn) {
+            backdialog.dismiss();
+        }
     }
 
     void newgame() {
