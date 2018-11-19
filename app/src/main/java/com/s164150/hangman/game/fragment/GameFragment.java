@@ -102,7 +102,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     }
 
     void guess() {
-        String input;
+        String input = "";
         input = guessInput.getText().toString().toLowerCase();
         if(input.length() > 1) {
             if(input.equals(galgelogik.getOrdet())) {
@@ -142,8 +142,10 @@ public class GameFragment extends Fragment implements View.OnClickListener {
             }
             guessText.setText(temp);
         }
-        guessInput.setText("");
-        imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+        if(input.length() != 0) {
+            guessInput.setText("");
+            imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+        }
         if(galgelogik.erSpilletSlut()) {
             gameover();
         }
