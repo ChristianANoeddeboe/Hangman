@@ -32,11 +32,17 @@ public class LoadFragment extends Fragment {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
                 Fragment gameFragment = new GameFragment();
                 getFragmentManager().beginTransaction()
                         .replace(R.id.fragcontainer, gameFragment)  // tom container i layout
                         .commit();
-                return null;
+                super.onPostExecute(o);
             }
         }
         new AsyncTaskNetwork().execute();
