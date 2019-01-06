@@ -32,14 +32,18 @@ public class LoadFragment extends Fragment {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                return null;
+            }
 
+            @Override
+            protected void onPostExecute(Object o) {
                 Fragment gameFragment = new GameFragment();
                 String tag = gameFragment.getClass().getSimpleName();
                 getFragmentManager().beginTransaction()
                         .addToBackStack(tag)
                         .replace(R.id.fragcontainer, gameFragment, "GameFragment")  // tom container i layout
                         .commit();
-                return null;
+                super.onPostExecute(o);
             }
         }
         new AsyncTaskNetwork().execute();
