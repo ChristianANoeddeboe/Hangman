@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -26,13 +25,15 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     ImageView levelView;
     TextView wordText, guessText;
     EditText guessInput;
-    Button nobackbtn, yesbackbtn;
+
+    String tag = "GameFragment";
+
+    //Used for testing.
+    boolean testing = true;
 
     InputMethodManager imm;
 
     Galgelogik galgelogik;
-
-    Dialog backdialog;
 
     Highscores highscores;
 
@@ -82,9 +83,13 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         if(v == exitbtn) {
             exit();
         }
+        /*
         if(v == yesbackbtn) {
             getActivity().finish();
         }
+        if(v == nobackbtn) {
+            System.out.println("no");
+        }*/
     }
 
     void newgame() {
@@ -96,6 +101,12 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         levelView.setImageResource(R.drawable.level0);
 
         guessText.setText("");
+
+        //Displays the word to guess in the "characters used" section.
+        if(testing) {
+            word = galgelogik.getOrdet();
+            guessText.setText(word);
+        }
     }
 
     void guess() {
@@ -138,6 +149,10 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 temp.append(galgelogik.getBrugteBogstaver().get(i));
             }
             guessText.setText(temp);
+            //Displays the word to guess in the "characters used" section.
+            if(testing) {
+                guessText.setText(galgelogik.getOrdet());
+            }
         }
         guessInput.setText("");
         imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
@@ -163,7 +178,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         args.putInt("score",highscores.getLastscore());
         wonFragment.setArguments(args);
         getFragmentManager().beginTransaction()
-                .replace(R.id.overlaycontainer, wonFragment)
+                .replace(R.id.overlaycontainer, wonFragment, "WonFragment")
                 .addToBackStack(null)
                 .commit();
         newgame();
@@ -175,24 +190,17 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         args.putCharSequence("word",galgelogik.getOrdet());
         lostFragment.setArguments(args);
         getFragmentManager().beginTransaction()
-                .replace(R.id.overlaycontainer, lostFragment)
+                .replace(R.id.overlaycontainer, lostFragment, "LostFragment")
                 .addToBackStack(null)
                 .commit();
         newgame();
     }
 
-    void exit() {
-        backdialog = new Dialog(getActivity());
-        backdialog.setContentView(R.layout.fragment_exit_dialog);
-
-        nobackbtn = backdialog.findViewById(R.id.nobackbtn);
-        yesbackbtn = backdialog.findViewById(R.id.yesbackbtn);
-
-        nobackbtn.setOnClickListener(this);
-        yesbackbtn.setOnClickListener(this);
-
-        backdialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-
-        backdialog.show();
+    public void exit() {
+        Fragment backFragment = new ExitFragment();
+        getFragmentManager().beginTransaction()
+                .replace(R.id.overlaycontainer, backFragment, "ExitFragment")
+                .addToBackStack(null)
+                .commit();
     }
 }

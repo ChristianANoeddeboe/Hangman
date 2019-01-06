@@ -32,9 +32,12 @@ public class LoadFragment extends Fragment {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
                 Fragment gameFragment = new GameFragment();
+                String tag = gameFragment.getClass().getSimpleName();
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.fragcontainer, gameFragment)  // tom container i layout
+                        .addToBackStack(tag)
+                        .replace(R.id.fragcontainer, gameFragment, "GameFragment")  // tom container i layout
                         .commit();
                 return null;
             }
