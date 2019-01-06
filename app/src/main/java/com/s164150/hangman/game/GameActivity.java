@@ -27,21 +27,18 @@ public class GameActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        //Ensures the back button will only show the back fragment if the gamefragment is on top
         FragmentManager fragmentManager = getSupportFragmentManager();
         int i = fragmentManager.getBackStackEntryCount();
-        String fragmentTag = fragmentManager.getBackStackEntryAt(i - 1).getName();
-        Fragment currentFragment = fragmentManager.findFragmentByTag(fragmentTag);
+        if(i > 0) {
+            String fragmentTag = fragmentManager.getBackStackEntryAt(i - 1).getName();
+            Fragment currentFragment = fragmentManager.findFragmentByTag(fragmentTag);
 
-        if(currentFragment instanceof GameFragment) {
-            System.out.println("Top fragment is gamefragment");
+            if(currentFragment instanceof GameFragment) {
+                GameFragment gameFragment = (GameFragment) currentFragment;
+                gameFragment.exit();
+                System.out.println("Top fragment is gamefragment");
+            }
         }
-
-        GameFragment gameFragment = (GameFragment) getSupportFragmentManager().findFragmentByTag("GameFragment");
-        ExitFragment exitFragment = (ExitFragment) getSupportFragmentManager().findFragmentByTag("ExitFragment");
-        //isResumed used instead of isVisible as this ensures the fragment is actually usable by the user.
-        if(gameFragment != null && gameFragment.isResumed() && exitFragment == null) {
-            gameFragment.exit();
-        }
-        //Used to disable back button in the game, such people wouldn't interrupt their game.
     }
 }

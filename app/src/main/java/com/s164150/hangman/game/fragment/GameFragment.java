@@ -177,9 +177,10 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         args.putInt("guess",galgelogik.getBrugteBogstaver().size());
         args.putInt("score",highscores.getLastscore());
         wonFragment.setArguments(args);
+        String tag = wonFragment.getClass().getSimpleName();
         getFragmentManager().beginTransaction()
-                .replace(R.id.overlaycontainer, wonFragment, "WonFragment")
-                .addToBackStack(null)
+                .replace(R.id.overlaycontainer, wonFragment, tag)
+                .addToBackStack(tag)
                 .commit();
         newgame();
     }
@@ -189,18 +190,20 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         Bundle args = new Bundle();
         args.putCharSequence("word",galgelogik.getOrdet());
         lostFragment.setArguments(args);
+        String tag = lostFragment.getClass().getSimpleName();
         getFragmentManager().beginTransaction()
-                .replace(R.id.overlaycontainer, lostFragment, "LostFragment")
-                .addToBackStack(null)
+                .replace(R.id.overlaycontainer, lostFragment, tag)
+                .addToBackStack(tag)
                 .commit();
         newgame();
     }
 
     public void exit() {
-        Fragment backFragment = new ExitFragment();
+        Fragment exitFragment = new ExitFragment();
+        String tag = exitFragment.getClass().getSimpleName();
         getFragmentManager().beginTransaction()
-                .replace(R.id.overlaycontainer, backFragment, "ExitFragment")
-                .addToBackStack(null)
+                .replace(R.id.overlaycontainer, exitFragment, tag)
+                .addToBackStack(tag)
                 .commit();
     }
 }

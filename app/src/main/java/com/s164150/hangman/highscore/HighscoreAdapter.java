@@ -18,13 +18,13 @@ public class HighscoreAdapter extends RecyclerView.Adapter<HighscoreAdapter.High
 
     public static class HighscoreViewHolder extends  RecyclerView.ViewHolder {
         public LinearLayout view;
-        public HighscoreViewHolder(LinearLayout v) {
+        HighscoreViewHolder(LinearLayout v) {
             super(v);
             view = v;
         }
     }
 
-    public HighscoreAdapter(ArrayList<Player> dataSet) {
+    HighscoreAdapter(ArrayList<Player> dataSet) {
         highscoreDataSet = dataSet;
     }
 

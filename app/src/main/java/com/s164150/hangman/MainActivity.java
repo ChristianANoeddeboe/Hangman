@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.s164150.hangman.game.GameActivity;
 import com.s164150.hangman.highscore.HighscoreActivity;
+import com.s164150.hangman.settings.SettingActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -47,7 +48,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(highscoreList);
         }
         if(v == settings) {
-            System.out.println("Settings pressed");
+            Intent wordList = new Intent(this, SettingActivity.class);
+            startActivity(wordList);
         }
         if(v == about) {
             System.out.println("About pressed");

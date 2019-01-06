@@ -40,8 +40,8 @@ public class LoadFragment extends Fragment {
                 Fragment gameFragment = new GameFragment();
                 String tag = gameFragment.getClass().getSimpleName();
                 getFragmentManager().beginTransaction()
+                        .replace(R.id.fragcontainer, gameFragment, tag)
                         .addToBackStack(tag)
-                        .replace(R.id.fragcontainer, gameFragment, "GameFragment")  // tom container i layout
                         .commit();
                 super.onPostExecute(o);
             }
