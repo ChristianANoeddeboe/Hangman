@@ -54,7 +54,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(wordList);
         }
         if(v == about) {
-            System.out.println("About pressed");
+            Intent aboutPage = new Intent(this, AboutActivity.class);
+            startActivity(aboutPage);
         }
     }
 }

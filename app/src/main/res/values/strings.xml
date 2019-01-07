@@ -25,4 +25,12 @@
     <string name="disable">DISABLE</string>
     <string name="enable">ENABLE</string>
 
+    <string name="abouttitle">ABOUT</string>
+    <string name="creator">CREATOR:</string>
+    <string name="creatorname">CHRISTIAN A. NØDDEBOE</string>
+    <string name="version">VERSION:</string>
+    <string name="versionnum">1.0</string>
+    <string name="studynum">STUDY NUMBER:</string>
+    <string name="studynumber">s164150</string>
+
 </resources>
