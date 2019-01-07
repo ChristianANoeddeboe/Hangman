@@ -18,6 +18,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     private RecyclerView.LayoutManager layoutManager;
     private Words words;
     private Button backbtn;
+    private Button[] disablebtns;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +34,10 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         adapter = new SettingAdapter(words.getWordList());
         recyclerView.setAdapter(adapter);
 
-        for(int i = 0 ; i < adapter.getItemCount() ; i++) {
-            System.out.println(adapter.getItemId(i));
+
+
+        for(int position = 0 ; position < adapter.getItemCount() ; position++) {
+
         }
 
         backbtn = findViewById(R.id.backbtn);

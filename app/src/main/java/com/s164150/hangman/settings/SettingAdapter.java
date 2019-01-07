@@ -12,6 +12,7 @@ import com.s164150.hangman.R;
 import com.s164150.hangman.data.Word;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.SettingViewHolder> {
 
@@ -43,17 +44,19 @@ public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.SettingV
         word = holder.view.findViewById(R.id.wordlistword);
         used = holder.view.findViewById(R.id.usedBtn);
 
-        String data = wordDataSet.get(position).getWord();
-        word.setText(data);
+        String wordData = wordDataSet.get(position).getWord();
+        String usedData = String.valueOf(wordDataSet.get(position).getUsed());
+        word.setText(wordData);
 
-        data = String.valueOf(wordDataSet.get(position).getUsed());
-        if(data.equals("0")) {
+        if(usedData.equals("0")) {
             used.setText(R.string.enable);
             int color = ContextCompat.getColor(holder.view.getContext(), R.color.lightgray);
             word.setTextColor(color);
         } else {
             used.setText(R.string.disable);
         }
+
+
     }
 
     @Override

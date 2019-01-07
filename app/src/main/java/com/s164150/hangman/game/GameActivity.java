@@ -37,7 +37,6 @@ public class GameActivity extends AppCompatActivity {
             if(currentFragment instanceof GameFragment) {
                 GameFragment gameFragment = (GameFragment) currentFragment;
                 gameFragment.exit();
-                System.out.println("Top fragment is gamefragment");
             }
         }
     }

@@ -1,5 +1,7 @@
 package com.s164150.hangman;
 
+import com.s164150.hangman.data.Words;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -184,7 +186,22 @@ public class Galgelogik {
     muligeOrd.clear();
     muligeOrd.addAll(new HashSet<String>(Arrays.asList(data.split(" "))));
 
+    for(int i = 0 ; i < muligeOrd.size() ; i++) {
+      if(muligeOrd.get(i).length() < 3) {
+        muligeOrd.remove(i);
+      }
+    }
+
     System.out.println("muligeOrd = " + muligeOrd);
+
     nulstil();
+  }
+
+  public void setMuligeOrd(ArrayList<String> muligeOrd) {
+    this.muligeOrd = muligeOrd;
+  }
+
+  public ArrayList<String> getMuligeOrd() {
+    return muligeOrd;
   }
 }

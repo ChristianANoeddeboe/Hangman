@@ -17,7 +17,7 @@ public class Words {
 
     private Words(Context ctx) {
         this.ctx = ctx;
-        readScore();
+        readWords();
     }
 
     public static Words getInstance(Context ctx) {
@@ -29,11 +29,14 @@ public class Words {
 
     public void addWord(String word) {
         wordList.add(new Word(word,1));
-        Collections.sort(wordList);
-        saveScore();
     }
 
-    private void saveScore() {
+    public void commitWords() {
+        Collections.sort(wordList);
+        saveWords();
+    }
+
+    private void saveWords() {
         prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
 
         String words = "";
@@ -52,17 +55,17 @@ public class Words {
         prefs.edit().putString("USED",used).apply();
     }
 
-    private void readScore() {
+    private void readWords() {
         prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
         String wordstemp = prefs.getString("WORD", "Play to add scores!");
-        String scorestemp = prefs.getString("SCORE","0");
+        String scorestemp = prefs.getString("USED","0");
         String[] words;
         String[] scores;
 
         words = wordstemp.split(",");
         scores = scorestemp.split(",");
 
-        for(int i = 0 ; i < words.length ; i++) {
+        for(int i = 0 ; i < words.length - 1 ; i++) {
             wordList.add(new Word(words[i],Integer.parseInt(scores[i])));
         }
     }

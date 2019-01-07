@@ -77,14 +77,14 @@ public class Highscores {
         words += playerscores.get(size-1).getWord();
         scores += playerscores.get(size-1).getScore();
 
-        prefs.edit().putString("WORD",words).apply();
-        prefs.edit().putString("SCORE",scores).apply();
+        prefs.edit().putString("SCOREWORD",words).apply();
+        prefs.edit().putString("SCOREVALUE",scores).apply();
     }
 
     private void readScore() {
         prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
-        String wordstemp = prefs.getString("WORD", "Play to add scores!");
-        String scorestemp = prefs.getString("SCORE","0");
+        String wordstemp = prefs.getString("SCOREWORD", "Play to add scores!");
+        String scorestemp = prefs.getString("SCOREVALUE","0");
         String[] words;
         String[] scores;
 
