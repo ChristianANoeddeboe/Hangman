@@ -1,6 +1,7 @@
 package com.s164150.hangman;
 
 import com.s164150.hangman.data.Words;
+import com.s164150.hangman.game.fragment.GameFragment;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -89,7 +90,11 @@ public class Galgelogik {
     spilletErVundet = false;
     spilletErTabt = false;
     ordet = muligeOrd.get(new Random().nextInt(muligeOrd.size()));
-    //ordet = "bo"; // For testing
+    //For testing
+    if(GameFragment.testing) {
+      ordet = muligeOrd.get(0);
+    }
+
     opdaterSynligtOrd();
   }
 

@@ -1,7 +1,7 @@
 package com.s164150.hangman.game.fragment;
 
-import android.app.Dialog;
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.s164150.hangman.Galgelogik;
+import com.s164150.hangman.PlaySound;
 import com.s164150.hangman.R;
 import com.s164150.hangman.data.Highscores;
 
@@ -26,10 +27,8 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     TextView wordText, guessText;
     EditText guessInput;
 
-    String tag = "GameFragment";
-
     //Used for testing.
-    boolean testing = true;
+    public static boolean testing = false;
 
     InputMethodManager imm;
 
@@ -60,10 +59,11 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
         newgame();
 
+        PlaySound.getInstance(getContext()).playSong(R.raw.ambient);
+
         imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
         guessInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            //TODO Make GBoard keyboard work with 'enter' button
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 System.out.println("EnterKey Pressed: " + event.toString());
                 if (event.getKeyCode() == KeyEvent.KEYCODE_ENTER || actionId == EditorInfo.IME_ACTION_DONE) {
@@ -83,16 +83,10 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         if(v == exitbtn) {
             exit();
         }
-        /*
-        if(v == yesbackbtn) {
-            getActivity().finish();
-        }
-        if(v == nobackbtn) {
-            System.out.println("no");
-        }*/
     }
 
     void newgame() {
+
         galgelogik.nulstil();
 
         String word = galgelogik.getSynligtOrd();
@@ -172,6 +166,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     }
 
     void won() {
+        PlaySound.getInstance(getContext()).playSong(R.raw.cheering);
         WonFragment wonFragment = new WonFragment();
         Bundle args = new Bundle();
         args.putInt("guess",galgelogik.getBrugteBogstaver().size());
@@ -186,6 +181,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     }
 
     void lost() {
+
         Fragment lostFragment = new LostFragment();
         Bundle args = new Bundle();
         args.putCharSequence("word",galgelogik.getOrdet());

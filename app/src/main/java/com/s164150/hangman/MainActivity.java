@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         highscore.setOnClickListener(this);
         settings.setOnClickListener(this);
         about.setOnClickListener(this);
+
+        PlaySound.getInstance(this).playSong(R.raw.ambient);
     }
 
     @Override

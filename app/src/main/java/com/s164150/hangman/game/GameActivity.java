@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.s164150.hangman.PlaySound;
 import com.s164150.hangman.R;
 import com.s164150.hangman.game.fragment.ExitFragment;
 import com.s164150.hangman.game.fragment.GameFragment;
@@ -16,6 +17,8 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        PlaySound.getInstance(this).stopSong();
 
         if(savedInstanceState == null) {
             Fragment loadFragment = new LoadFragment();

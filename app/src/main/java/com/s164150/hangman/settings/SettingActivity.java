@@ -31,7 +31,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
         words = words.getInstance(this);
 
-        adapter = new SettingAdapter(words.getWordList());
+        adapter = new SettingAdapter(words);
         recyclerView.setAdapter(adapter);
 
 

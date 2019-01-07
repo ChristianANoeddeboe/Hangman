@@ -18,6 +18,14 @@ public class Word implements Comparable {
         return used;
     }
 
+    public void switchUsed() {
+        if(used == 1) {
+            used = 0;
+        } else {
+            used = 1;
+        }
+    }
+
     @Override
     public int compareTo(Object o) {
         Word other = (Word) o;

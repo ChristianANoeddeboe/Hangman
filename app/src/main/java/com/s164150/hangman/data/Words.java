@@ -11,6 +11,7 @@ import java.util.Collections;
 public class Words {
 
     private ArrayList<Word> wordList = new ArrayList<>();
+    private ArrayList<String> existingWords = new ArrayList<>();
     private static Words words;
     private SharedPreferences prefs;
     private Context ctx;
@@ -28,6 +29,10 @@ public class Words {
     }
 
     public void addWord(String word) {
+        if(existingWords.contains(word)) {
+            return;
+        }
+        existingWords.add(word);
         wordList.add(new Word(word,1));
     }
 
@@ -58,15 +63,15 @@ public class Words {
     private void readWords() {
         prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
         String wordstemp = prefs.getString("WORD", "Play to add scores!");
-        String scorestemp = prefs.getString("USED","0");
+        String usedtemp = prefs.getString("USED","-1");
         String[] words;
-        String[] scores;
+        String[] uses;
 
         words = wordstemp.split(",");
-        scores = scorestemp.split(",");
+        uses = usedtemp.split(",");
 
         for(int i = 0 ; i < words.length - 1 ; i++) {
-            wordList.add(new Word(words[i],Integer.parseInt(scores[i])));
+            wordList.add(new Word(words[i],Integer.parseInt(uses[i])));
         }
     }
 

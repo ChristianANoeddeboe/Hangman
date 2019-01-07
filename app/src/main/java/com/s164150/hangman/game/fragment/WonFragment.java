@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.s164150.hangman.PlaySound;
 import com.s164150.hangman.R;
 
 public class WonFragment extends Fragment implements View.OnClickListener {
@@ -38,6 +39,8 @@ public class WonFragment extends Fragment implements View.OnClickListener {
         noagainbtn.setOnClickListener(this);
         yesagainbtn.setOnClickListener(this);
 
+        PlaySound.getInstance(getContext()).playSong(R.raw.booing);
+
         return parent;
     }
 
@@ -45,10 +48,12 @@ public class WonFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         if(v == noagainbtn) {
             getActivity().finish();
+            PlaySound.getInstance(getContext()).playSong(R.raw.ambient);
         }
         if(v == yesagainbtn) {
             container.setBackgroundColor(getResources().getColor(R.color.transparent));
             getFragmentManager().popBackStack();
+            PlaySound.getInstance(getContext()).playSong(R.raw.ambient);
         }
     }
 }
