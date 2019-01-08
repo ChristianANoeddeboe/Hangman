@@ -11,7 +11,9 @@
     android:background="@drawable/dialogbackground"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".game.fragment.ExitDialogFragment">
+    tools:context=".game.fragment.ExitFragment"
+    android:clickable="true"
+    android:focusable="true">
 
     <TextView
         android:id="@+id/textView"

@@ -39,7 +39,7 @@ public class WonFragment extends Fragment implements View.OnClickListener {
         noagainbtn.setOnClickListener(this);
         yesagainbtn.setOnClickListener(this);
 
-        PlaySound.getInstance(getContext()).playSong(R.raw.booing);
+        PlaySound.getInstance(getContext()).playSong(R.raw.cheering);
 
         return parent;
     }
