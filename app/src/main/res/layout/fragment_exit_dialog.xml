@@ -1,79 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="10dp"
-    android:layout_marginTop="80dp"
-    android:layout_marginRight="10dp"
-    android:layout_marginBottom="100dp"
-    android:background="@drawable/dialogbackground"
-    android:gravity="center"
-    android:orientation="vertical"
     tools:context=".game.fragment.ExitFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:clickable="true"
     android:focusable="true">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:gravity="center"
-        android:text="@string/exit_confirm1"
-        android:textColor="@android:color/black"
-        android:textSize="36sp"
-        app:fontFamily="@font/malisemibold" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="10dp"
-        android:gravity="center"
-        android:text="@string/exit_confirm2"
-        android:textColor="@android:color/black"
-        android:textSize="24sp"
-        app:fontFamily="@font/malisemibold" />
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/dialogbackground"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/yesbackbtn"
+        <TextView
+            android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:paddingBottom="5dp"
-            android:text="@string/yes"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="@string/exit_confirm2"
             android:textColor="@android:color/black"
-            android:textSize="30sp"
+            android:textSize="24sp"
             app:fontFamily="@font/malisemibold" />
 
-        <Button
-            android:id="@+id/nobackbtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_weight="1"
-            android:background="@drawable/nobtnback"
-            android:paddingBottom="5dp"
-            android:text="@string/no"
-            android:textColor="@android:color/white"
-            android:textSize="30sp"
-            app:fontFamily="@font/malisemibold" />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center"
+                android:text="@string/exit_confirm1"
+                android:textColor="@android:color/black"
+                android:textSize="36sp"
+                app:fontFamily="@font/malisemibold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/yesbackbtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:paddingBottom="5dp"
+                    android:text="@string/yes"
+                    android:textColor="@android:color/black"
+                    android:textSize="30sp"
+                    app:fontFamily="@font/malisemibold" />
+
+                <Button
+                    android:id="@+id/nobackbtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/nobtnback"
+                    android:paddingBottom="5dp"
+                    android:text="@string/no"
+                    android:textColor="@android:color/white"
+                    android:textSize="30sp"
+                    app:fontFamily="@font/malisemibold" />
+            </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</FrameLayout>

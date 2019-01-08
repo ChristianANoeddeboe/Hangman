@@ -149,7 +149,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
             }
         }
         guessInput.setText("");
-        imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+        if(imm.isAcceptingText()) {
+            imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+        }
         if(galgelogik.erSpilletSlut()) {
             gameover();
         }

@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    tools:context=".game.fragment.GameFragment">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,7 +21,7 @@
     android:background="@drawable/dialogbackground"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".game.fragment.GameFragment">
+    >
 
     <TextView
         android:id="@+id/textView"
@@ -26,26 +36,29 @@
         app:fontFamily="@font/malisemibold" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:text="@string/wordwas"
             android:textColor="@android:color/black"
-            android:textSize="24sp"
+            android:textSize="22sp"
             app:fontFamily="@font/malisemibold" />
 
         <TextView
             android:id="@+id/wordwas"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="test"
             android:textColor="@android:color/black"
-            android:textSize="24sp"
+            android:textSize="22sp"
             app:fontFamily="@font/malisemibold" />
     </LinearLayout>
 
@@ -100,3 +113,4 @@
             app:fontFamily="@font/malisemibold" />
     </LinearLayout>
 </LinearLayout>
+</FrameLayout>

@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    tools:context=".game.fragment.GameFragment">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,8 +19,7 @@
     android:layout_marginBottom="100dp"
     android:background="@drawable/dialogbackground"
     android:gravity="center"
-    android:orientation="vertical"
-    tools:context=".game.fragment.GameFragment">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/textView"
@@ -123,3 +131,4 @@
             app:fontFamily="@font/malisemibold" />
     </LinearLayout>
 </LinearLayout>
+</FrameLayout>
