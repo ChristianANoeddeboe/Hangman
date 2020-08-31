@@ -24,6 +24,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+
         recyclerView = findViewById(R.id.wordlist);
 
         layoutManager = new LinearLayoutManager(this);
@@ -36,9 +37,9 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
 
 
-        for(int position = 0 ; position < adapter.getItemCount() ; position++) {
+        /*for(int position = 0 ; position < adapter.getItemCount() ; position++) {
 
-        }
+        }*/
 
         backbtn = findViewById(R.id.backbtn);
         backbtn.setOnClickListener(this);

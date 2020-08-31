@@ -36,7 +36,7 @@ public class LoadFragment extends Fragment {
                     Words words = Words.getInstance(getActivity());
                     if(words.getWordList().size() == 0) {
                         Galgelogik.getinstance().hentOrdFraDr();
-                        ArrayList<String> muligeOrd = Galgelogik.getinstance().getMuligeOrd();
+                        ArrayList<String> muligeOrd = Galgelogik.getinstance().getConfirmedWords();
                         String word;
                         for(int i = 0 ; i < muligeOrd.size() ; i++) {
                             word = muligeOrd.get(i);
@@ -47,14 +47,14 @@ public class LoadFragment extends Fragment {
                         words.commitWords();
                     }
                     Galgelogik galgelogik = Galgelogik.getinstance();
-                    ArrayList<Word> muligeOrd = Words.getInstance(getActivity()).getWordList();
-                    ArrayList<String> newMuligeOrd = new ArrayList<>();
-                    for(Word word : muligeOrd) {
+                    ArrayList<Word> ord = Words.getInstance(getActivity()).getWordList();
+                    ArrayList<String> newOrd = new ArrayList<>();
+                    for(Word word : ord) {
                         if(word.getUsed() == 1) {
-                            newMuligeOrd.add(word.getWord());
+                            newOrd.add(word.getWord());
                         }
                     }
-                    galgelogik.setMuligeOrd(newMuligeOrd);
+                    galgelogik.setConfirmedWords(newOrd);
 
 
                 } catch (Exception e) {

@@ -14,7 +14,7 @@ import java.util.Random;
 
 public class Galgelogik {
   /** AHT afprøvning er muligeOrd synlig på pakkeniveau */
-  ArrayList<String> muligeOrd = new ArrayList<>();
+  ArrayList<String> confirmedWords = new ArrayList<>();
   private String ordet;
   private ArrayList<String> brugteBogstaver = new ArrayList<>();
   private String synligtOrd;
@@ -63,17 +63,17 @@ public class Galgelogik {
   private static Galgelogik galgelogik;
 
   private Galgelogik() {
-    muligeOrd.add("bil");
-    muligeOrd.add("computer");
-    muligeOrd.add("programmering");
-    muligeOrd.add("motorvej");
-    muligeOrd.add("busrute");
-    muligeOrd.add("gangsti");
-    muligeOrd.add("skovsnegl");
-    muligeOrd.add("solsort");
-    muligeOrd.add("seksten");
-    muligeOrd.add("sytten");
-    muligeOrd.add("atten");
+    confirmedWords.add("bil");
+    confirmedWords.add("computer");
+    confirmedWords.add("programmering");
+    confirmedWords.add("motorvej");
+    confirmedWords.add("busrute");
+    confirmedWords.add("gangsti");
+    confirmedWords.add("skovsnegl");
+    confirmedWords.add("solsort");
+    confirmedWords.add("seksten");
+    confirmedWords.add("sytten");
+    confirmedWords.add("atten");
     nulstil();
   }
 
@@ -89,10 +89,10 @@ public class Galgelogik {
     antalForkerteBogstaver = 0;
     spilletErVundet = false;
     spilletErTabt = false;
-    ordet = muligeOrd.get(new Random().nextInt(muligeOrd.size()));
+    ordet = confirmedWords.get(new Random().nextInt(confirmedWords.size()));
     //For testing
     if(GameFragment.testing) {
-      ordet = muligeOrd.get(0);
+      ordet = confirmedWords.get(0);
     }
 
     opdaterSynligtOrd();
@@ -188,25 +188,23 @@ public class Galgelogik {
 
     System.out.println("data = " + data);
     System.out.println("data = " + Arrays.asList(data.split("\\s+")));
-    muligeOrd.clear();
+    ArrayList<String> muligeOrd = new ArrayList<>();
     muligeOrd.addAll(new HashSet<String>(Arrays.asList(data.split(" "))));
 
-    for(int i = 0 ; i < muligeOrd.size() ; i++) {
-      if(muligeOrd.get(i).length() < 3) {
-        muligeOrd.remove(i);
-      }
+    for(String word : muligeOrd) {
+      if(word.length() > 4) confirmedWords.add(word);
     }
 
-    System.out.println("muligeOrd = " + muligeOrd);
+    System.out.println("Ord = " + confirmedWords);
 
     nulstil();
   }
 
-  public void setMuligeOrd(ArrayList<String> muligeOrd) {
-    this.muligeOrd = muligeOrd;
+  public void setConfirmedWords(ArrayList<String> confirmedWords) {
+    this.confirmedWords = confirmedWords;
   }
 
-  public ArrayList<String> getMuligeOrd() {
-    return muligeOrd;
+  public ArrayList<String> getConfirmedWords() {
+    return confirmedWords;
   }
 }
